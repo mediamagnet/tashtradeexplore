@@ -1,0 +1,23 @@
+name: tashtradeexplore
+description: "Discord bot for managing trade and exploration missions in the TASh discord"
+version: 1.6.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.13.0 <3.0.0'
+
+dependencies:
+  logging: ^1.0.0
+  nyxx: ^3.0.0
+  nyxx_commander: ^3.0.0
+  nyxx_interactions: ^3.0.0
+  toml: any
+  http: any
+  html: any
+  deep_pick: any
+  time_ago_provider: any
+#   path: ^1.8.0
+
+dev_dependencies:
+  lints: any
+  test: ^1.16.0

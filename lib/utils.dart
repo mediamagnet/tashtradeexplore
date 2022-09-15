@@ -16,15 +16,18 @@ String get dartVersion {
   final platformVersion = Platform.version;
   return platformVersion.split('(').first;
 }
+
 bool get isTest => isBool(conf('bot/test'));
 bool get syncCommands => isBool(conf('Bot/SyncCommands'));
-Snowflake? get testGuildSnowflake => isTest ? Snowflake(108344598018957312) : null;
+Snowflake? get testGuildSnowflake =>
+    isTest ? Snowflake(108344598018957312) : null;
 
 bool isBool(String? value) {
   return value != null && (value == 'true' || value == '1');
 }
 
-bool getSyncCommandsOrOverride([bool? overrideSync]) => overrideSync ?? syncCommands;
+bool getSyncCommandsOrOverride([bool? overrideSync]) =>
+    overrideSync ?? syncCommands;
 
 String getMemoryUsageString() {
   final current = (ProcessInfo.currentRss / 1024 / 1024).toStringAsFixed(2);
@@ -48,10 +51,12 @@ String conf(String path) {
 
 String? get TOMLPrefix => conf('Bot/Prefix');
 
-FutureOr<String?> prefixHandler(IMessage message) async => mentionPrefixHandler(message) ?? TOMLPrefix;
+FutureOr<String?> prefixHandler(IMessage message) async =>
+    mentionPrefixHandler(message) ?? TOMLPrefix;
 
 String getApproxMemberCount(INyxxWebsocket client) {
-  if (DateTime.now().difference(_approxMemberCountLastAccess).inMinutes > 5 || _approxMemberCount == -1) {
+  if (DateTime.now().difference(_approxMemberCountLastAccess).inMinutes > 5 ||
+      _approxMemberCount == -1) {
     Future(() async {
       var amc = 0;
       var amo = 0;

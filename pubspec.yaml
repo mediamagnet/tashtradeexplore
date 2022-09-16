@@ -13,6 +13,7 @@ dependencies:
   toml: any
   http: any
   html: any
+  image: any
   deep_pick: any
   time_ago_provider: any
 #   path: ^1.8.0

@@ -51,7 +51,22 @@ Future main() async {
         ],
       ))
       ..registerSlashCommand(
-          SlashCommandBuilder('explore', 'Set up exploration mission', [])
+          SlashCommandBuilder('explore', 'Set up exploration mission', [
+        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'start', 'Start system of mission',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'end', 'System mission ends in',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'duration', 'How long misison runs for.',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'tag', "Adds carriers tag if it has one",
+            required: false)
+      ])
             ..registerHandler(tte.exploreCommand))
       ..syncOnReady();
   } catch (e) {

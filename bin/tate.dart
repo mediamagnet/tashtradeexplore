@@ -33,23 +33,13 @@ Future main() async {
     bot.onReady.listen((IReadyEvent e) {
       print('Connected to Discord');
 
-      bot.setPresence(PresenceBuilder.of(
-          status: UserStatus.online,
-          activity: ActivityBuilder('with the BGS', ActivityType.game,
-              url: 'https://github.com/mediamagnet/tashtradeexplore')));
+//      bot.setPresence(PresenceBuilder.of(
+//          status: UserStatus.online,
+//          activity: ActivityBuilder('with the BGS', ActivityType.game,
+//              url: 'https://github.com/mediamagnet/tashtradeexplore')));
     });
 
     IInteractions.create(WebsocketInteractionBackend(bot))
-      ..registerSlashCommand(SlashCommandBuilder(
-        "test",
-        "this is a test command",
-        [
-          CommandOptionBuilder(
-              CommandOptionType.subCommand, "subtest", "This is a subtest")
-            ..registerHandler(
-                (event) => event.respond(MessageBuilder.content('Example')))
-        ],
-      ))
       ..registerSlashCommand(
           SlashCommandBuilder('explore', 'Set up exploration mission', [
         CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
@@ -65,6 +55,12 @@ Future main() async {
             required: true),
         CommandOptionBuilder(
             CommandOptionType.string, 'tag', "Adds carriers tag if it has one",
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'bg', 'background image',
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'logo', 'logo of carrier',
             required: false)
       ])
             ..registerHandler(tte.exploreCommand))

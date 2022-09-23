@@ -14,27 +14,34 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   final bg = event.interaction.getArg('bg');
   final logo = event.interaction.getArg('logo');
   var baseImage;
+  var resizedImage;
 
   await event.acknowledge();
 
   if (bg == null) {
     final bgImg = File('default_bg.png').uri.pathSegments.last;
     baseImage = decodePng(File(bgImg).readAsBytesSync());
+    resizedImage = copyResize(baseImage, width: 500);
   } else {
     final request = await HttpClient().getUrl(
         Uri.parse(event.interaction.resolved!.attachments.elementAt(0).url));
     final response = await request.close();
     response.pipe(File('dl_bg.png').openWrite());
-    final bgImg = File('dl.bg.png').uri.pathSegments.last;
+    final bgImg = File('dl_bg.png').uri.pathSegments.last;
     baseImage = decodePng(File(bgImg).readAsBytesSync());
+    resizedImage = copyResize(baseImage, width: 500);
   }
 
   print('$tag, $name, $start, $end, $duration, $bg, $logo');
 
-  drawString(baseImage!, BitmapFont.fromZip(font), 0, 0, 'Carrier: $tag $name');
-  drawString(baseImage!, BitmapFont.fromZip(font), 0, 50, 'Start Date: $start');
-  drawString(baseImage!, BitmapFont.fromZip(font), 0, 100, 'End Date: $end');
-  File('test.png').writeAsBytesSync(encodePng(baseImage));
+  drawString(
+      resizedImage!, BitmapFont.fromZip(font), 0, 0, 'Carrier: $tag $name');
+  drawString(
+      resizedImage!, BitmapFont.fromZip(font), 0, 50, 'Start Date: $start');
+  drawString(
+      resizedImage!, BitmapFont.fromZip(font), 0, 100, 'End Date: $end');
+
+  File('test.png').writeAsBytesSync(encodePng(resizedImage));
   String outF = File('test.png').uri.pathSegments.last;
   print(outF);
   final attachment = AttachmentBuilder.file(File(outF));

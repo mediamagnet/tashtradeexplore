@@ -1,14 +1,15 @@
-// import 'dart:html' as html;
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'dart:io';
 import 'package:image/image.dart';
 import 'package:nyxx/nyxx.dart';
+import 'package:http/http.dart' as http;
 
 Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   File file = File('./font/atkinson.zip');
   List<int> font = file.readAsBytesSync();
   final tag = event.interaction.getArg('tag');
   final name = event.interaction.getArg('name');
+  final startDate = event.interaction.getArg('start-date');
   final start = event.interaction.getArg('start');
   final end = event.interaction.getArg('end');
   final duration = event.interaction.getArg('duration');
@@ -18,20 +19,22 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   var resizedImage;
 
   await event.acknowledge();
-  var URL = event.interaction.resolved!.attachments;
 
   if (bg == null) {
     final bgImg = File('default_bg.png').uri.pathSegments.last;
     baseImage = decodePng(File(bgImg).readAsBytesSync());
-    resizedImage = copyResize(baseImage, width: 500);
+    resizedImage = copyResize(baseImage, width: 854);
   } else {
-    print(URL.first.url);
-    final request = await HttpClient().getUrl(Uri.parse(URL.first.url));
-    final response = await request.close();
-    response.pipe(File('dl_bg.png').openWrite());
+    print(event.interaction.resolved!.attachments.first.url);
+    http
+        .get(Uri.parse(event.interaction.resolved!.attachments.first.url))
+        .then((response) {
+      new File('dl_bg.png').writeAsBytes(response.bodyBytes);
+    });
     final bgImg = File('dl_bg.png').uri.pathSegments.last;
+    print(bgImg.length);
     baseImage = decodePng(File(bgImg).readAsBytesSync());
-    resizedImage = copyResize(baseImage, width: 500);
+    resizedImage = copyResize(baseImage, width: 854);
   }
 
   print('$tag, $name, $start, $end, $duration, $bg, $logo');
@@ -47,6 +50,7 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   print(outF);
   final attachment = AttachmentBuilder.file(File(outF));
 
-  return event
-      .respond(MessageBuilder.content('New File here!')..files = [attachment]);
+  return event.respond(
+      MessageBuilder.content('New File here!')..files = [attachment],
+      hidden: true);
 }

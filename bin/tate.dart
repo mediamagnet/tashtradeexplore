@@ -22,7 +22,7 @@ Future main() async {
     botID = config['Bot']['ID'];
     botToken = config['Bot']['Token'];
 
-    print(botToken);
+    print('Connected');
 
     bot = NyxxFactory.createNyxxWebsocket(botToken, GatewayIntents.all)
       ..registerPlugin(Logging())
@@ -45,13 +45,16 @@ Future main() async {
         CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
             required: true),
         CommandOptionBuilder(
-            CommandOptionType.string, 'start', 'Start system of mission',
+             CommandOptionType.string, 'start-date', 'Start system of mission',
+             required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'start', 'System Mission Starts in',
             required: true),
         CommandOptionBuilder(
             CommandOptionType.string, 'end', 'System mission ends in',
             required: true),
         CommandOptionBuilder(
-            CommandOptionType.string, 'duration', 'How long misison runs for.',
+            CommandOptionType.string, 'duration', 'How long mission runs for.',
             required: true),
         CommandOptionBuilder(
             CommandOptionType.string, 'tag', "Adds carriers tag if it has one",

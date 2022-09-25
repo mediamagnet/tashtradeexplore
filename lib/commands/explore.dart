@@ -1,3 +1,4 @@
+// import 'dart:html' as html;
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'dart:io';
 import 'package:image/image.dart';
@@ -17,14 +18,15 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   var resizedImage;
 
   await event.acknowledge();
+  var URL = event.interaction.resolved!.attachments;
 
   if (bg == null) {
     final bgImg = File('default_bg.png').uri.pathSegments.last;
     baseImage = decodePng(File(bgImg).readAsBytesSync());
     resizedImage = copyResize(baseImage, width: 500);
   } else {
-    final request = await HttpClient().getUrl(
-        Uri.parse(event.interaction.resolved!.attachments.elementAt(0).url));
+    print(URL.first.url);
+    final request = await HttpClient().getUrl(Uri.parse(URL.first.url));
     final response = await request.close();
     response.pipe(File('dl_bg.png').openWrite());
     final bgImg = File('dl_bg.png').uri.pathSegments.last;
@@ -38,8 +40,7 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
       resizedImage!, BitmapFont.fromZip(font), 0, 0, 'Carrier: $tag $name');
   drawString(
       resizedImage!, BitmapFont.fromZip(font), 0, 50, 'Start Date: $start');
-  drawString(
-      resizedImage!, BitmapFont.fromZip(font), 0, 100, 'End Date: $end');
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 100, 'End Date: $end');
 
   File('test.png').writeAsBytesSync(encodePng(resizedImage));
   String outF = File('test.png').uri.pathSegments.last;

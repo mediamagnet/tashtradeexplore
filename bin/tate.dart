@@ -30,14 +30,16 @@ Future main() async {
       ..registerPlugin(CliIntegration())
       ..connect();
 
-    bot.onReady.listen((IReadyEvent e) {
+    bot.eventsWs.onReady.listen((IReadyEvent e) {
       print('Connected to Discord');
 
-//      bot.setPresence(PresenceBuilder.of(
-//          status: UserStatus.online,
-//          activity: ActivityBuilder('with the BGS', ActivityType.game,
-//              url: 'https://github.com/mediamagnet/tashtradeexplore')));
+    bot.setPresence(PresenceBuilder.of(
+          status: UserStatus.online,
+          activity: ActivityBuilder('with the BGS', ActivityType.game,
+              url: 'https://github.com/mediamagnet/tashtradeexplore')));
     });
+    
+
 
     IInteractions.create(WebsocketInteractionBackend(bot))
       ..registerSlashCommand(

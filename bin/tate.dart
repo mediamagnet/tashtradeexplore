@@ -45,8 +45,11 @@ Future main() async {
         CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
             required: true),
         CommandOptionBuilder(
-             CommandOptionType.string, 'start-date', 'Start system of mission',
-             required: true),
+            CommandOptionType.string, 'ident', "Carrier's Identification Tag",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'start-date', 'Start system of mission',
+            required: true),
         CommandOptionBuilder(
             CommandOptionType.string, 'start', 'System Mission Starts in',
             required: true),
@@ -54,16 +57,19 @@ Future main() async {
             CommandOptionType.string, 'end', 'System mission ends in',
             required: true),
         CommandOptionBuilder(
+            CommandOptionType.string, 'destination', 'destination system',
+            required: true),
+        CommandOptionBuilder(
             CommandOptionType.string, 'duration', 'How long mission runs for.',
             required: true),
         CommandOptionBuilder(
-            CommandOptionType.string, 'tag', "Adds carriers tag if it has one",
+            CommandOptionType.string, 'tag', "Carrier tag i.e. N.A.C. or T.S.C. (Optional)",
             required: false),
         CommandOptionBuilder(
-            CommandOptionType.attachment, 'bg', 'background image',
+            CommandOptionType.attachment, 'bg', 'background image (Optional)',
             required: false),
         CommandOptionBuilder(
-            CommandOptionType.attachment, 'logo', 'logo of carrier',
+            CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)',
             required: false)
       ])
             ..registerHandler(tte.exploreCommand))

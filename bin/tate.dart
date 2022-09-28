@@ -42,6 +42,7 @@ Future main() async {
 
 
     IInteractions.create(WebsocketInteractionBackend(bot))
+      ..registerSlashCommand(SlashCommandBuilder('ping', 'Shows latency', [])..registerHandler((tte.pingCommand)))
       ..registerSlashCommand(
           SlashCommandBuilder('explore', 'Set up exploration mission', [
         CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",

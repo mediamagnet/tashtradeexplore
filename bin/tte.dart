@@ -1,7 +1,7 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:toml/toml.dart';
-import 'package:tashtradeexplore/tte.dart' as tte;
+import 'package:tte/tte.dart' as tte;
 // import 'package:tashtradeexplore/utils.dart' as utils;
 import 'dart:async';
 
@@ -37,6 +37,12 @@ Future main() async {
           status: UserStatus.online,
           activity: ActivityBuilder('with the BGS', ActivityType.game,
               url: 'https://github.com/mediamagnet/tashtradeexplore')));
+
+    bot.eventsWs.onMessageReceived.listen((IMessageReceivedEvent e) {
+      if (e.message.content.contains(botID)) {
+        e.message.createReaction(UnicodeEmoji('🫡'));
+      }
+    });
     });
     
 

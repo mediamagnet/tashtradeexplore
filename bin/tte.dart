@@ -1,7 +1,7 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:toml/toml.dart';
-import 'package:tte/tte.dart' as tte;
+import 'package:tte/lib.dart' as tte;
 // import 'package:tashtradeexplore/utils.dart' as utils;
 import 'dart:async';
 

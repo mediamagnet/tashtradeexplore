@@ -1,5 +1,5 @@
 // import 'dart:async';
-// import 'dart:io' show Platform, ProcessInfo;
+import 'dart:io';
 // 
 // import 'package:nyxx/nyxx.dart';
 // import 'package:toml/toml.dart';
@@ -23,3 +23,12 @@
 //}
 
 // String? get TOMLPrefix => conf('Bot/Prefix');
+
+Future<void> cleanImages(List images) async {
+  images.forEach((image) {
+    var image1 = File(image);
+    if (image1.exists != false) {
+      image1.delete();
+    }
+  });
+}

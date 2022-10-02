@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:image/image.dart';
 import 'package:nyxx/nyxx.dart';
 import 'package:http/http.dart' as http;
+// import 'package:tashtradeexplore/utils.dart' as utils;
 
 Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   File file = File('./font/atkinson.zip');
@@ -22,25 +23,10 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   var logoImage;
   var msgText;
   var resLogo;
-  final oldImg = File('final.png');
-  final logoFile = File('logo.png');
-  final logoFile1 = File('logo1.png');
-  final dlOld = File('dl_bg.png');
 
-  if (oldImg.exists == true) {
-    oldImg.delete();
-  }
-  if (logoFile.exists == true) {
-    logoFile.delete();
-  }
-  if (logoFile1.exists == true) {
-    logoFile1.delete();
-  }
-  if (dlOld.exists == true) {
-    dlOld.delete();
-  }
+//  utils.cleanImages(['final.png', 'logo.png', 'logo1.png', 'dl_bg.png']);
 
-  await event.acknowledge();
+  await event.acknowledge(hidden: true);
 
   if (bg == null) {
     final bgImg = File('default_bg.png').uri.pathSegments.last;

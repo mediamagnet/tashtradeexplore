@@ -25,15 +25,19 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   final oldImg = File('final.png');
   final logoFile = File('logo.png');
   final logoFile1 = File('logo1.png');
+  final dlOld = File('dl_bg.png');
 
-  if (oldImg.exists != true) {
+  if (oldImg.exists == true) {
     oldImg.delete();
   }
-  if (logoFile.exists != true) {
+  if (logoFile.exists == true) {
     logoFile.delete();
   }
-  if (logoFile1.exists != true) {
+  if (logoFile1.exists == true) {
     logoFile1.delete();
+  }
+  if (dlOld.exists == true) {
+    dlOld.delete();
   }
 
   await event.acknowledge();

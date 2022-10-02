@@ -24,7 +24,6 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
   var msgText;
   var resLogo;
 
-//  utils.cleanImages(['tradeFinal.png', 'tradeLogo.png', 'tradeLogo1.png', 'tradeDl_bg.png']);
 
   await event.acknowledge(hidden: true);
 
@@ -55,9 +54,8 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
 
   print('$tag, $name, $station, $system, $units, $bg, $logo');
 
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 168,
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 208,
       'New Carrier load request for:');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 208, profit);
   if (tag == null) {
     drawString(resizedImage!, BitmapFont.fromZip(font), 0, 248,
         'Carrier: $name $ident');
@@ -65,11 +63,12 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
     drawString(resizedImage!, BitmapFont.fromZip(font), 0, 248,
         'Carrier: $tag $name $ident');
   }
-  drawString(
-      resizedImage!, BitmapFont.fromZip(font), 0, 288, 'Load from: $station in $system');
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 288,
+      'Load from: $station in $system');
   drawString(resizedImage!, BitmapFont.fromZip(font), 0, 328,
       'Load $units of $commodity');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 408, 'Total Profit $profit K/Unit');
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 408,
+      'Total Profit $profit K/Unit');
 
   if (logo != null) {
     http
@@ -130,8 +129,6 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
   var msgText;
   var resLogo;
 
-//  utils.cleanImages(['tradeFinal.png', 'tradeLogo.png', 'tradeLogo1.png', 'tradeDl_bg.png']);
-
   await event.acknowledge(hidden: true);
 
   if (bg == null) {
@@ -148,8 +145,8 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
         .url);
     http
         .get(Uri.parse(event.interaction.resolved!.attachments
-        .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
-        .url))
+            .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
+            .url))
         .then((response) {
       new File('tradeDl_bg.png').writeAsBytes(response.bodyBytes);
     });
@@ -161,9 +158,8 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
 
   print('$tag, $name, $station, $system, $units, $bg, $logo');
 
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 168,
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 208,
       'New Carrier unload request for:');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 208, profit);
   if (tag == null) {
     drawString(resizedImage!, BitmapFont.fromZip(font), 0, 248,
         'Carrier: $name $ident');
@@ -171,17 +167,18 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
     drawString(resizedImage!, BitmapFont.fromZip(font), 0, 248,
         'Carrier: $tag $name $ident');
   }
-  drawString(
-      resizedImage!, BitmapFont.fromZip(font), 0, 288, 'Unload to: $station in $system');
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 288,
+      'Unload to: $station in $system');
   drawString(resizedImage!, BitmapFont.fromZip(font), 0, 328,
-      'Load $units of $commodity');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 408, 'Total Profit $profit K/Unit');
+      'Unload $units of $commodity');
+  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 408,
+      'Total Profit $profit K/Unit');
 
   if (logo != null) {
     http
         .get(Uri.parse(event.interaction.resolved!.attachments
-        .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
-        .url))
+            .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
+            .url))
         .then((response) {
       new File('tradeLogo.png').writeAsBytes(response.bodyBytes);
     });
@@ -207,13 +204,12 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
 
   if (tag == null) {
     msgText =
-    '```New Unload Mission for ***$name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit to ***$station*** in ***$system***```';
+        '```New Unload Mission for ***$name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit to ***$station*** in ***$system***```';
   } else {
     msgText =
-    '```New Unload Mission for ***$tag $name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit to ***$station*** in ***$system***```';
+        '```New Unload Mission for ***$tag $name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit to ***$station*** in ***$system***```';
   }
 
   return event.respond(MessageBuilder.content(msgText)..files = [attachment],
       hidden: true);
 }
-

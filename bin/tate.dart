@@ -83,30 +83,72 @@ Future main() async {
             required: false)
       ])
             ..registerHandler(tte.exploreCommand))
-      ..registerSlashCommand(SlashCommandBuilder('load', 'Create a Loading Mission', [
-        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name", required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'ident', "Carrier's Identification Tag", required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'commodity', 'Commodity you are loading', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'system', 'System loading from', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'station', 'Station loading from', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'units', 'Total number of units', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'profit', 'Profit in K credits per unit.', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'tag', "Carrier tag i.e. N.A.C. or T.S.C. (Optional)", required: false),
-        CommandOptionBuilder(CommandOptionType.attachment, 'bg', 'background image (Optional)', required: false),
-        CommandOptionBuilder(CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)', required: false)
-      ])..registerHandler((tte.loadCommand)))
-      ..registerSlashCommand(SlashCommandBuilder('unload', 'Create an unloading mission', [
-        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name", required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'ident', "Carrier's Identification Tag", required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'commodity', 'Commodity you are unloading', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'system', 'System unloading from', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'station', 'Station unloading from', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'units', 'Total number of units', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'profit', 'Profit in K credits per unit.', required: true),
-        CommandOptionBuilder(CommandOptionType.string, 'tag', "Carrier tag i.e. N.A.C. or T.S.C. (Optional)", required: false),
-        CommandOptionBuilder(CommandOptionType.attachment, 'bg', 'background image (Optional)', required: false),
-        CommandOptionBuilder(CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)', required: false)
-      ])..registerHandler((tte.unloadCommand)))
+      ..registerSlashCommand(
+          SlashCommandBuilder('load', 'Create a Loading Mission', [
+        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'ident', "Carrier's Identification Tag",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'commodity', 'Commodity you are loading',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'system', 'System loading from',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'station', 'Station loading from',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'units', 'Total number of units',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'profit', 'Profit in K credits per unit.',
+            required: true),
+        CommandOptionBuilder(CommandOptionType.string, 'tag',
+            "Carrier tag i.e. N.A.C. or T.S.C. (Optional)",
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'bg', 'background image (Optional)',
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)',
+            required: false)
+      ])
+            ..registerHandler((tte.loadCommand)))
+      ..registerSlashCommand(
+          SlashCommandBuilder('unload', 'Create an unloading mission', [
+        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'ident', "Carrier's Identification Tag",
+            required: true),
+        CommandOptionBuilder(CommandOptionType.string, 'commodity',
+            'Commodity you are unloading',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'system', 'System unloading from',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'station', 'Station unloading from',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'units', 'Total number of units',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'profit', 'Profit in K credits per unit.',
+            required: true),
+        CommandOptionBuilder(CommandOptionType.string, 'tag',
+            "Carrier tag i.e. N.A.C. or T.S.C. (Optional)",
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'bg', 'background image (Optional)',
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)',
+            required: false)
+      ])
+            ..registerHandler((tte.unloadCommand)))
       ..syncOnReady();
   } catch (e) {
     print(e);

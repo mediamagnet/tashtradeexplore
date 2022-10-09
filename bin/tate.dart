@@ -149,6 +149,9 @@ Future main() async {
             required: false)
       ])
             ..registerHandler((tte.unloadCommand)))
+      ..registerSlashCommand(SlashCommandBuilder(
+          'damagedsystems', 'Scrapes damaged system data from Inara', [])
+        ..registerHandler((tte.damagedsystemsCommand)))
       ..syncOnReady();
   } catch (e) {
     print(e);

@@ -24,7 +24,6 @@ Future<void> pingCommand(ISlashCommandInteractionEvent event) async {
 
   final embed = EmbedBuilder()
     ..color = color
-    ..imageUrl = 'https://i.imgur.com/pFhWc7e.gif'
     ..addField(
         name: "Gateway latency",
         content: "${gatewayDelayInMillis.abs().floor()} ms",

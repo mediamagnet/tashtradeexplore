@@ -149,9 +149,38 @@ Future main() async {
             required: false)
       ])
             ..registerHandler((tte.unloadCommand)))
+      ..registerSlashCommand(
+          SlashCommandBuilder('combat', 'Create a Combat/WMM Mission', [
+        CommandOptionBuilder(CommandOptionType.string, 'name', "Carrier's name",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'ident', "Carrier's Identification Tag",
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'system', 'System loading from',
+            required: true),
+        CommandOptionBuilder(
+            CommandOptionType.string, 'faction', 'Faction Targeted',
+            required: true),
+        CommandOptionBuilder(CommandOptionType.string, 'profit', 'Total profit',
+            required: true),
+        CommandOptionBuilder(CommandOptionType.string, 'tag',
+            "Carrier tag i.e. N.A.C. or T.S.C. (Optional)",
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'bg', 'background image (Optional)',
+            required: false),
+        CommandOptionBuilder(
+            CommandOptionType.attachment, 'logo', 'logo of carrier (Optional)',
+            required: false)
+      ])
+            ..registerHandler((tte.combatCommand)))
       ..registerSlashCommand(SlashCommandBuilder(
           'damagedsystems', 'Scrapes damaged system data from Inara', [])
         ..registerHandler((tte.damagedsystemsCommand)))
+      ..registerSlashCommand(SlashCommandBuilder(
+          'abandoned', 'Pulls abandoned systems from inara', [])
+        ..registerHandler((tte.abandonedCommand)))
       ..syncOnReady();
   } catch (e) {
     print(e);

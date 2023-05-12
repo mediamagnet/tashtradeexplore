@@ -29,7 +29,7 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
   await event.acknowledge(hidden: true);
 
   if (bg == null) {
-    final bgImg = File('default_bg.png').uri.pathSegments.last;
+    final bgImg = File('./images/default_bg.png').uri.pathSegments.last;
     baseImage = decodePng(File(bgImg).readAsBytesSync());
     resizedImage = copyResize(baseImage, width: 854);
   } else {
@@ -45,9 +45,9 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
             .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
             .url))
         .then((response) {
-      new File('dl_bg.png').writeAsBytes(response.bodyBytes);
+      new File('./images/dl_bg.png').writeAsBytes(response.bodyBytes);
     });
-    final bgImg = File('dl_bg.png').uri.pathSegments.last;
+    final bgImg = File('./images/dl_bg.png').uri.pathSegments.last;
     print(bgImg.length);
     baseImage = decodePng(File(bgImg).readAsBytesSync());
     resizedImage = copyResize(baseImage, width: 854);
@@ -55,23 +55,23 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
 
   print('$tag, $name, $start, $end, $duration, $bg, $logo');
 
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 208,
+  drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 208,
       'New Exploration Mission to:');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 248, dest);
+  drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 248, dest);
   if (tag == null) {
-    drawString(resizedImage!, BitmapFont.fromZip(font), 0, 288,
+    drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 288,
         'Carrier: $name $ident');
   } else {
-    drawString(resizedImage!, BitmapFont.fromZip(font), 0, 288,
+    drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 288,
         'Carrier: $tag $name $ident');
   }
   drawString(
-      resizedImage!, BitmapFont.fromZip(font), 0, 328, 'Start System: $start');
+      resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 328, 'Start System: $start');
   drawString(
-      resizedImage!, BitmapFont.fromZip(font), 0, 368, 'End System: $end');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 408,
+      resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 368, 'End System: $end');
+  drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 408,
       'Start Date: $startDate');
-  drawString(resizedImage!, BitmapFont.fromZip(font), 0, 448,
+  drawString(resizedImage!, font: BitmapFont.fromZip(font), x: 0, y: 448,
       'Duration: $duration days');
 
   if (logo != null) {
@@ -80,25 +80,25 @@ Future<void> exploreCommand(ISlashCommandInteractionEvent event) async {
             .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
             .url))
         .then((response) {
-      new File('logo.png').writeAsBytes(response.bodyBytes);
+      new File('./images/logo.png').writeAsBytes(response.bodyBytes);
     });
-    final logoImg = File('logo.png').uri.pathSegments.last;
+    final logoImg = File('./images/logo.png').uri.pathSegments.last;
     logoImage = decodePng(File(logoImg).readAsBytesSync());
     if (logoImage!.width >= 150) {
       resLogo = copyResize(logoImage, width: 150);
-      File('logo1.png').writeAsBytesSync(encodePng(resLogo));
-      var resLogo1 = File('logo1.png').uri.pathSegments.last;
+      File('./images/logo1.png').writeAsBytesSync(encodePng(resLogo));
+      var resLogo1 = File('./images/logo1.png').uri.pathSegments.last;
       logoImage = decodePng(File(resLogo1).readAsBytesSync());
     }
     final xSize = logoImage!.width.toInt();
     final ySize = logoImage!.height.toInt();
     final xLoc = 854 - xSize;
     final yLoc = 480 - ySize;
-    drawImage(resizedImage!, resLogo!, dstX: xLoc.toInt(), dstY: yLoc.toInt());
+    compositeImage(resizedImage!, resLogo!, dstX: xLoc.toInt(), dstY: yLoc.toInt());
   }
 
-  File('final.png').writeAsBytesSync(encodePng(resizedImage));
-  String outF = File('final.png').uri.pathSegments.last;
+  File('./images/final.png').writeAsBytesSync(encodePng(resizedImage));
+  String outF = File('./images/final.png').uri.pathSegments.last;
   print(outF);
   final attachment = AttachmentBuilder.file(File(outF));
 

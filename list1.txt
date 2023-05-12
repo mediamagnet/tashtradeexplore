@@ -1,0 +1,84 @@
+4 Island
+4 Mountain
+4 Plains
+4 Swamp
+5 Forest
+Ancient Excavation
+Arcane Sanctum
+Archetype of Endurance
+Artisan of Kozilek
+Ashen Rider
+Baleful Force
+Blast of Genius
+Blatant Thievery
+Brainstorm
+Brilliant Ultimatum
+Bring to Light
+Commander's Sphere
+Command Tower
+Conflux
+Cruel Ultimatum
+Crumbling Necropolis
+Cultivate
+Darksteel Ingot
+Dig Through Time
+Diluvian Primordial
+Dread Cacodemon
+Exotic Orchard
+Explosive Vegetation
+Faerie Macabre
+Farseek
+Fellwar Stone
+Fierce Empath
+Fist of Suns
+Frontier Bivouac
+Gift of Immortality
+Grave Upheaval
+In Garruk's Wake
+Ingot Chewer
+Interpret the Signs
+Intet, the Dreamer
+Jodah, Archmage Eternal
+Jungle Shrine
+Kodama's Reach
+Krosan Verge
+Luminate Primordial
+Mercurial Chemister
+Molten Primordial
+Myojin of Seeing Winds
+Myriad Landscape
+Mystic Monastery
+Narset, Enlightened Master
+Nezahal, Primal Tide
+Nissa's Revelation
+Nomad Outpost
+Opulent Palace
+Painful Truths
+Plague Wind
+Plasm Capture
+Rampant Growth
+Recross the Paths
+Sakura-Tribe Elder
+Sandsteppe Citadel
+Sandwurm Convergence
+Savage Lands
+Seaside Citadel
+Seeds of Renewal
+Sepulchral Primordial
+Sphere of the Suns
+Sunbird's Invocation
+Swarm Intelligence
+Swiftfoot Boots
+Sylvan Reclamation
+Terastodon
+Timesifter
+Treacherous Terrain
+Treasure Cruise
+Unexpected Results
+Violent Ultimatum
+Vivid Grove
+Volcanic Vision
+Wildfire Eternal
+Wolf of Devil's Breach
+Worst Fears
+Zendikar Resurgent

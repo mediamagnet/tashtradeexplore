@@ -29,7 +29,7 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
   var logoImage;
   var msgText;
   var resLogo;
-  var baseImageFile = File('tash-ptn-mission-clone.png').uri.pathSegments.last;
+  var baseImageFile = File('./images/tradebase.png').uri.pathSegments.last;
   baseImage = decodePng(File(baseImageFile).readAsBytesSync());
 
   await event.acknowledge(hidden: true);
@@ -47,30 +47,35 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
             .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
             .url))
         .then((response) {
-      new File('tradeDl_bg.png').writeAsBytes(response.bodyBytes);
+      new File('./images/tradeDl_bg.png').writeAsBytes(response.bodyBytes);
     });
-    final bgImg = File('tradeDl_bg.png').uri.pathSegments.last;
+    final bgImg = File('./images/tradeDl_bg.png').uri.pathSegments.last;
     print(bgImg.length);
     var baseImage1 = decodePng(File(bgImg).readAsBytesSync());
     resizedImage = copyResize(baseImage1!, width: 434);
-    drawImage(baseImage, resizedImage!, dstX: 42, dstY: 12);
+    compositeImage(baseImage, resizedImage!, dstX: 42, dstY: 12);
   }
-
 
   print('$tag, $name, $station, $system, $units, $bg, $logo');
 
-  drawString(baseImage!, BitmapFont.fromZip(varino), 546, 38,
+  drawString(baseImage!,font: BitmapFont.fromZip(varino),x: 546,y: 38,
       'CARRIER LOADING MISSION');
-  drawString(baseImage!, BitmapFont.fromZip(atkinson18), 702, 62, ident.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson18),x: 702,y: 62,
+      ident.toString().toUpperCase());
   if (tag != null) {
-    drawString(baseImage!, BitmapFont.fromZip(atkinson22), 546, 83, "$tag $name".toUpperCase());
+    drawString(baseImage!,font: BitmapFont.fromZip(atkinson22),x: 546,y: 83,
+        "$tag $name".toUpperCase());
   } else {
-    drawString(baseImage!, BitmapFont.fromZip(atkinson22), 546, 83, "$name".toUpperCase());
+    drawString(baseImage!,font: BitmapFont.fromZip(atkinson22),x: 546,y: 83,
+        "$name".toUpperCase());
   }
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 125, commodity.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 157, system.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 189, station.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 221,
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 125,
+      commodity.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 157,
+      system.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 189,
+      station.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 221,
       '$profit k per unit, $units units');
 
   if (logo != null) {
@@ -79,31 +84,31 @@ Future<void> loadCommand(ISlashCommandInteractionEvent event) async {
             .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
             .url))
         .then((response) {
-      new File('tradeLogo.png').writeAsBytes(response.bodyBytes);
+      new File('./images/tradeLogo.png').writeAsBytes(response.bodyBytes);
     });
-    final logoImg = File('tradeLogo.png').uri.pathSegments.last;
+    final logoImg = File('./images/tradeLogo.png').uri.pathSegments.last;
     logoImage = decodePng(File(logoImg).readAsBytesSync());
     if (logoImage!.width >= 150) {
       resLogo = copyResize(logoImage, width: 100);
-      File('tradeLogo1.png').writeAsBytesSync(encodePng(resLogo));
-      var resLogo1 = File('tradeLogo1.png').uri.pathSegments.last;
+      File('./images/tradeLogo1.png').writeAsBytesSync(encodePng(resLogo));
+      var resLogo1 = File('./images/tradeLogo1.png').uri.pathSegments.last;
       logoImage = decodePng(File(resLogo1).readAsBytesSync());
     }
-    drawImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
+    compositeImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
   } else {
-    final logoImg = File('trade.png').uri.pathSegments.last;
+    final logoImg = File('./images/trade.png').uri.pathSegments.last;
     logoImage = decodePng(File(logoImg).readAsBytesSync());
     if (logoImage!.width >= 100) {
       resLogo = copyResize(logoImage, width: 100);
-      File('trade.png').writeAsBytesSync(encodePng(resLogo));
-      var resLogo1 = File('trade.png').uri.pathSegments.last;
+      File('./images/trade.png').writeAsBytesSync(encodePng(resLogo));
+      var resLogo1 = File('./images/trade.png').uri.pathSegments.last;
       logoImage = decodePng(File(resLogo1).readAsBytesSync());
     }
-    drawImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
+    compositeImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
   }
 
-  File('tradeFinal.png').writeAsBytesSync(encodePng(baseImage));
-  String outF = File('tradeFinal.png').uri.pathSegments.last;
+  File('./images/tradeFinal.png').writeAsBytesSync(encodePng(baseImage));
+  String outF = File('./images/tradeFinal.png').uri.pathSegments.last;
   print(outF);
   final attachment = AttachmentBuilder.file(File(outF));
 
@@ -143,7 +148,7 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
   var logoImage;
   var msgText;
   var resLogo;
-  var baseImageFile = File('tash-ptn-mission-clone.png').uri.pathSegments.last;
+  var baseImageFile = File('./images/tradebase.png').uri.pathSegments.last;
   baseImage = decodePng(File(baseImageFile).readAsBytesSync());
 
   await event.acknowledge(hidden: true);
@@ -158,75 +163,80 @@ Future<void> unloadCommand(ISlashCommandInteractionEvent event) async {
         .url);
     http
         .get(Uri.parse(event.interaction.resolved!.attachments
-        .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
-        .url))
+            .singleWhere((bg) => bg.id == event.interaction.getArg('bg'))
+            .url))
         .then((response) {
-      new File('tradeDl_bg.png').writeAsBytes(response.bodyBytes);
+      new File('./images/tradeDl_bg.png').writeAsBytes(response.bodyBytes);
     });
-    final bgImg = File('tradeDl_bg.png').uri.pathSegments.last;
+    final bgImg = File('./images/tradeDl_bg.png').uri.pathSegments.last;
     print(bgImg.length);
     var baseImage1 = decodePng(File(bgImg).readAsBytesSync());
     resizedImage = copyResize(baseImage1!, width: 434);
-    drawImage(baseImage, resizedImage!, dstX: 42, dstY: 12);
+    compositeImage(baseImage, resizedImage!, dstX: 42, dstY: 12);
   }
-
 
   print('$tag, $name, $station, $system, $units, $bg, $logo');
 
-  drawString(baseImage!, BitmapFont.fromZip(varino), 546, 38,
+  drawString(baseImage!,font: BitmapFont.fromZip(varino),x: 546,y: 38,
       'CARRIER UNLOADING MISSION');
-  drawString(baseImage!, BitmapFont.fromZip(atkinson18), 702, 62, ident.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson18),x: 702,y: 62,
+      ident.toString().toUpperCase());
   if (tag != null) {
-    drawString(baseImage!, BitmapFont.fromZip(atkinson22), 546, 83, "$tag $name".toUpperCase());
+    drawString(baseImage!,font: BitmapFont.fromZip(atkinson22),x: 546,y: 83,
+        "$tag $name".toUpperCase());
   } else {
-    drawString(baseImage!, BitmapFont.fromZip(atkinson22), 546, 83, "$name".toUpperCase());
+    drawString(baseImage!,font: BitmapFont.fromZip(atkinson22),x: 546,y: 83,
+        "$name".toUpperCase());
   }
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 125, commodity.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 157, system.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 189, station.toString().toUpperCase());
-  drawString(baseImage!, BitmapFont.fromZip(atkinson), 671, 221,
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 125,
+      commodity.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 157,
+      system.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 189,
+      station.toString().toUpperCase());
+  drawString(baseImage!,font: BitmapFont.fromZip(atkinson),x: 671,y: 221,
       '$profit k per unit, $units units');
 
   if (logo != null) {
     http
         .get(Uri.parse(event.interaction.resolved!.attachments
-        .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
-        .url))
+            .singleWhere((logo) => logo.id == event.interaction.getArg('logo'))
+            .url))
         .then((response) {
-      new File('tradeLogo.png').writeAsBytes(response.bodyBytes);
+      new File('./images/tradeLogo.png').writeAsBytes(response.bodyBytes);
     });
-    final logoImg = File('tradeLogo.png').uri.pathSegments.last;
+    final logoImg = File('./images/tradeLogo.png').uri.pathSegments.last;
     logoImage = decodePng(File(logoImg).readAsBytesSync());
     if (logoImage!.width >= 150) {
       resLogo = copyResize(logoImage, width: 100);
-      File('tradeLogo1.png').writeAsBytesSync(encodePng(resLogo));
-      var resLogo1 = File('tradeLogo1.png').uri.pathSegments.last;
+      File('./images/tradeLogo1.png').writeAsBytesSync(encodePng(resLogo));
+      var resLogo1 = File('./images/tradeLogo1.png').uri.pathSegments.last;
       logoImage = decodePng(File(resLogo1).readAsBytesSync());
     }
-    drawImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
+    compositeImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
   } else {
-    final logoImg = File('trade.png').uri.pathSegments.last;
+    final logoImg = File('./images/trade.png').uri.pathSegments.last;
     logoImage = decodePng(File(logoImg).readAsBytesSync());
     if (logoImage!.width >= 100) {
       resLogo = copyResize(logoImage, width: 100);
-      File('trade.png').writeAsBytesSync(encodePng(resLogo));
-      var resLogo1 = File('trade.png').uri.pathSegments.last;
+      File('./images/trade.png').writeAsBytesSync(encodePng(resLogo));
+      var resLogo1 = File('./images/trade.png').uri.pathSegments.last;
       logoImage = decodePng(File(resLogo1).readAsBytesSync());
     }
-    drawImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
+    compositeImage(baseImage!, resLogo!, dstX: 930, dstY: 13);
   }
 
-  File('tradeFinal.png').writeAsBytesSync(encodePng(baseImage));
-  String outF = File('tradeFinal.png').uri.pathSegments.last;
+  File('./images/tradeFinal.png').writeAsBytesSync(encodePng(baseImage));
+  String outF = File('./images/tradeFinal.png').uri.pathSegments.last;
   print(outF);
   final attachment = AttachmentBuilder.file(File(outF));
 
   if (tag == null) {
     msgText =
-    '```New Load Mission for ***$name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit from ***$station*** in ***$system***```';
+        '```New Load Mission for ***$name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit from ***$station*** in ***$system***```';
   } else {
     msgText =
-    '```New Load Mission for ***$tag $name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit from ***$station*** in ***$system***```';
+        '```New Load Mission for ***$tag $name $ident*** \nUnload ***$units*** of ***$commodity*** for ***$profit*** per unit from ***$station*** in ***$system***```';
   }
 
   return event.respond(MessageBuilder.content(msgText)..files = [attachment],
